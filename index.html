@@ -1,165 +1,232 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Valentine 💖</title>
+  <title>For My Valentine 💖</title>
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      color: white;
-      text-align: center;
-      overflow-x: hidden;
+    body{
+      margin:0;
+      font-family:'Segoe UI',sans-serif;
+      overflow:hidden;
+      background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+      color:white;
+      text-align:center;
     }
 
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(0,0,0,0.3);
-      padding: 10px;
+    /* START SCREEN */
+    #startScreen{
+      position:fixed;
+      width:100%;
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      flex-direction:column;
+      background:linear-gradient(135deg,#ff758c,#ff7eb3);
+      z-index:10;
+      animation:fadeIn 1s;
     }
 
-    nav button {
-      background: white;
-      color: #ff4d6d;
-      border: none;
-      padding: 8px 15px;
-      margin: 5px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: bold;
+    #startBtn{
+      padding:15px 30px;
+      font-size:22px;
+      border:none;
+      border-radius:30px;
+      background:white;
+      color:#ff4d6d;
+      cursor:pointer;
+      animation:pulse 1.5s infinite;
     }
 
-    section {
-      min-height: 100vh;
-      padding-top: 100px;
-      display: none;
-      animation: fadeIn 1s ease-in-out;
+    @keyframes pulse{
+      0%{transform:scale(1);}
+      50%{transform:scale(1.1);}
+      100%{transform:scale(1);}
     }
 
-    #home { display: block; }
-
-    h1 { font-size: 45px; }
-    p { font-size: 22px; }
-
-    button.action {
-      padding: 12px 25px;
-      font-size: 22px;
-      margin: 15px;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: 0.3s;
+    @keyframes fadeIn{
+      from{opacity:0;}
+      to{opacity:1;}
     }
 
-    #yesBtn {
-      background-color: #ff4d6d;
-      color: white;
+    nav{
+      position:fixed;
+      top:0;
+      width:100%;
+      padding:10px;
+      background:rgba(0,0,0,0.3);
+      display:none;
     }
 
-    #noBtn {
-      background-color: white;
-      color: #ff4d6d;
+    nav button{
+      margin:5px;
+      padding:8px 15px;
+      border:none;
+      border-radius:20px;
+      font-weight:bold;
+      cursor:pointer;
+      color:#ff4d6d;
+      background:white;
     }
 
-    button:hover { transform: scale(1.1); }
-
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
+    section{
+      min-height:100vh;
+      padding-top:120px;
+      display:none;
+      animation:fadeIn 1s;
     }
 
-    .heart {
-      position: fixed;
-      bottom: -10px;
-      font-size: 24px;
-      animation: floatUp 6s linear infinite;
-      color: #ff4d6d;
+    #home{display:block;}
+
+    h1{font-size:45px;}
+    p{font-size:22px;line-height:1.6;}
+
+    button.action{
+      padding:12px 25px;
+      font-size:22px;
+      margin:15px;
+      border:none;
+      border-radius:30px;
+      cursor:pointer;
+      transition:0.3s;
     }
 
-    @keyframes floatUp {
-      0% { transform: translateY(0); opacity: 1; }
-      100% { transform: translateY(-110vh); opacity: 0; }
+    #yesBtn{background:#ff4d6d;color:white;}
+    #noBtn{background:white;color:#ff4d6d;}
+
+    button:hover{transform:scale(1.1);}
+
+    #message{
+      font-size:34px;
+      margin-top:30px;
+      display:none;
+      animation:fadeIn 2s;
     }
 
-    #message {
-      font-size: 36px;
-      margin-top: 30px;
-      display: none;
+    /* HEARTS */
+    .heart{
+      position:fixed;
+      bottom:-10px;
+      font-size:22px;
+      animation:floatUp 6s linear infinite;
+    }
+
+    @keyframes floatUp{
+      0%{transform:translateY(0);opacity:1;}
+      100%{transform:translateY(-110vh);opacity:0;}
+    }
+
+    /* PETALS */
+    .petal{
+      position:fixed;
+      top:-20px;
+      font-size:24px;
+      animation:fall 5s linear forwards;
+    }
+
+    @keyframes fall{
+      0%{transform:translateY(0) rotate(0deg);}
+      100%{transform:translateY(110vh) rotate(360deg);}
     }
   </style>
 </head>
 
 <body>
 
-<nav>
+<!-- START SCREEN -->
+<div id="startScreen">
+  <h1>🔔 A Very Important Message</h1>
+  <button id="startBtn">Click Here 💌</button>
+</div>
+
+<nav id="navbar">
   <button onclick="showTab('home')">Home 💖</button>
   <button onclick="showTab('story')">Our Story 📖</button>
-  <button onclick="showTab('messageTab')">Special Message 💌</button>
+  <button onclick="showTab('letter')">My Letter 💌</button>
 </nav>
 
 <!-- HOME -->
 <section id="home">
   <h1>Will you be my Valentine? ❤️</h1>
-  <p>You are the most special person in my life ✨</p>
+  <p>
+    In a world full of people, my heart chose only you.<br>
+    Your smile is my favorite sight, and your happiness is my wish.
+  </p>
 
   <button id="yesBtn" class="action">Yes 💘</button>
   <button id="noBtn" class="action">No 😅</button>
 
-  <div id="message">You just made me the happiest person alive! 💖🌹</div>
+  <div id="message">
+    You just made my heart bloom with happiness 🌸💖<br>
+    This moment means everything to me.
+  </div>
 </section>
 
 <!-- STORY -->
 <section id="story">
-  <h1>Our Beautiful Story 📖</h1>
+  <h1>Our Beautiful Journey 📖</h1>
   <p>
-    From the first day we talked, everything felt magical.<br>
-    Every moment with you is my favorite memory.<br>
-    And I want to create thousands more with you. 💞
+    From our first conversation to every memory we created,<br>
+    every second with you feels magical.<br>
+    You are not just a part of my life,<br>
+    you are the best part of it. 💞
   </p>
 </section>
 
-<!-- MESSAGE -->
-<section id="messageTab">
-  <h1>A Special Message For You 💌</h1>
+<!-- LETTER -->
+<section id="letter">
+  <h1>A Letter From My Heart 💌</h1>
   <p>
-    No matter what happens,<br>
-    you will always have a special place in my heart.<br><br>
+    No matter where life takes us,<br>
+    I promise to always care, respect, and cherish you.<br>
+    You are my today and all of my tomorrows.<br><br>
     Happy Valentine’s Day ❤️
   </p>
 </section>
 
 <script>
-  // Tab switching
-  function showTab(tabId) {
-    document.querySelectorAll("section").forEach(sec => sec.style.display = "none");
-    document.getElementById(tabId).style.display = "block";
+  // Start screen
+  document.getElementById("startBtn").onclick = function(){
+    document.getElementById("startScreen").style.display="none";
+    document.getElementById("navbar").style.display="block";
   }
 
-  // Moving NO button
-  const noBtn = document.getElementById("noBtn");
-  noBtn.addEventListener("mouseover", () => {
-    noBtn.style.position = "absolute";
-    noBtn.style.left = Math.random() * window.innerWidth + "px";
-    noBtn.style.top = Math.random() * window.innerHeight + "px";
+  // Tabs
+  function showTab(id){
+    document.querySelectorAll("section").forEach(s=>s.style.display="none");
+    document.getElementById(id).style.display="block";
+  }
+
+  // NO button run away
+  const noBtn=document.getElementById("noBtn");
+  noBtn.addEventListener("mouseover",()=>{
+    noBtn.style.position="absolute";
+    noBtn.style.left=Math.random()*window.innerWidth+"px";
+    noBtn.style.top=Math.random()*window.innerHeight+"px";
   });
 
-  // YES button message
-  document.getElementById("yesBtn").onclick = function() {
-    document.getElementById("message").style.display = "block";
-  };
-
-  // Floating hearts
-  function createHeart() {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "💖";
-    heart.style.left = Math.random() * 100 + "vw";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 6000);
+  // YES button petals
+  document.getElementById("yesBtn").onclick=function(){
+    document.getElementById("message").style.display="block";
+    for(let i=0;i<40;i++){
+      let petal=document.createElement("div");
+      petal.className="petal";
+      petal.innerHTML="🌸";
+      petal.style.left=Math.random()*100+"vw";
+      document.body.appendChild(petal);
+      setTimeout(()=>petal.remove(),5000);
+    }
   }
-  setInterval(createHeart, 300);
+
+  // Floating hearts always
+  function heart(){
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="💖";
+    h.style.left=Math.random()*100+"vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+  }
+  setInterval(heart,300);
 </script>
 
 </body>
