@@ -53,7 +53,6 @@
       to {opacity: 1; transform: translateY(0);}
     }
 
-    /* Floating hearts */
     .heart {
       position: fixed;
       bottom: -10px;
@@ -87,7 +86,6 @@
   <div id="message">Yayyy! 💖 You made my day! 💞</div>
 
   <script>
-    // Moving NO button
     const noBtn = document.getElementById("noBtn");
     noBtn.addEventListener("mouseover", () => {
       noBtn.style.position = "absolute";
@@ -95,12 +93,10 @@
       noBtn.style.top = Math.random() * window.innerHeight + "px";
     });
 
-    // YES button message
     document.getElementById("yesBtn").onclick = function() {
       document.getElementById("message").style.display = "block";
     };
 
-    // Create floating hearts
     function createHeart() {
       const heart = document.createElement("div");
       heart.className = "heart";
@@ -119,9 +115,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
