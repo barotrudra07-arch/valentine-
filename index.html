@@ -1,112 +1,155 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Valentine Surprise</title>
+<title>For Someone Special 💖</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 
 <style>
 body{
   margin:0;
-  font-family:'Poppins', sans-serif;
-  overflow:hidden;
-  background: linear-gradient(135deg,#fbc2eb,#a6c1ee);
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,#fbc2eb,#a6c1ee);
   color:#5a3e5b;
   text-align:center;
+  overflow-x:hidden;
 }
 
-nav{
-  position:fixed;
-  top:0;
-  width:100%;
-  padding:15px;
-  backdrop-filter: blur(10px);
-  background: rgba(255,255,255,0.2);
-  font-weight:600;
-}
-
-.section{display:none;padding-top:100px;}
-
-h1{
-  font-family:'Playfair Display', serif;
-  font-size:48px;
-  color:#7b2cbf;
-  animation: fadeIn 2s ease-in-out;
-}
-
-button{
-  padding:12px 25px;
-  font-size:18px;
-  border:none;
-  border-radius:30px;
-  cursor:pointer;
-  margin:10px;
-  transition:0.3s;
-}
-
-#yesBtn{
-  background:#7b2cbf;
-  color:white;
-  box-shadow:0 4px 15px rgba(123,44,191,0.4);
-}
-
-#noBtn{
-  background:white;
-  color:#7b2cbf;
-  position:absolute;
-}
-
+/* Start Screen */
 #startScreen{
   position:fixed;
+  height:100vh;
   width:100%;
-  height:100%;
-  background:linear-gradient(135deg,#c3aed6,#f5d0fe);
   display:flex;
   justify-content:center;
   align-items:center;
   flex-direction:column;
+  background:linear-gradient(135deg,#c3aed6,#f5d0fe);
   z-index:10;
 }
+
+#startScreen button{
+  padding:15px 30px;
+  border:none;
+  border-radius:30px;
+  font-size:20px;
+  cursor:pointer;
+}
+
+/* Tabs */
+nav{
+  display:none;
+  padding:15px;
+  background:rgba(255,255,255,0.3);
+  backdrop-filter:blur(10px);
+}
+
+nav button{
+  margin:5px;
+  padding:10px 20px;
+  border:none;
+  border-radius:20px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+section{
+  display:none;
+  padding:80px 20px;
+  min-height:100vh;
+}
+
+h1{
+  font-family:'Playfair Display',serif;
+  font-size:45px;
+  color:#7b2cbf;
+}
+
+button.action{
+  padding:12px 25px;
+  font-size:20px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  margin:10px;
+}
+
+#yesBtn{background:#7b2cbf;color:white;}
+#noBtn{background:white;color:#7b2cbf;position:absolute;}
 
 .petal{
   position:fixed;
   top:-10px;
   font-size:24px;
-  animation: fall linear infinite;
+  animation:fall linear forwards;
 }
 
 @keyframes fall{
   to{transform:translateY(100vh);}
-}
-
-@keyframes fadeIn{
-  from{opacity:0;transform:translateY(-20px);}
-  to{opacity:1;}
 }
 </style>
 </head>
 
 <body>
 
+<!-- Start Screen -->
 <div id="startScreen">
   <h2>💌 Important Message</h2>
-  <button onclick="startSite()">Click Here</button>
+  <button onclick="enterSite()">Click Here</button>
 </div>
 
-<nav>
-  My Special Valentine Page 💖
+<!-- Tabs -->
+<nav id="navbar">
+  <button onclick="showTab('home')">Home 💖</button>
+  <button onclick="showTab('about')">About You ✨</button>
+  <button onclick="showTab('memories')">my world</button>
+  <button onclick="showTab('letter')">Letter 💌</button>
 </nav>
 
-<div id="main" class="section">
-  <h1>Angel, Will you be my Valentine? ❤️</h1>
-  <button id="yesBtn" onclick="showLove()">Yes 💖</button>
-  <button id="noBtn" onmouseover="moveNo()">No </button>
-</div>
+<!-- Sections -->
+<section id="home">
+  <h1> Angel, Will you be my Valentine? ❤️</h1>
+  <button id="yesBtn" class="action" onclick="showLove()">Yes 💘</button>
+  <button id="noBtn" class="action" onmouseover="moveNo()">No </button>
+</section>
+
+<section id="about">
+  <h1>What Makes You Special ✨</h1>
+  <p style="font-size:22px">
+    Your smile brightens my darkest days.<br>
+    Your kindness makes the world softer.<br>
+    Your presence makes my life beautiful.
+  </p>
+</section>
+
+<section id="memories">
+  <h1>Our Memories 📖</h1>
+  <p style="font-size:22px">
+    Every chat, every laugh, every moment spent with you<br>
+    is a memory I will always treasure in my heart.
+  </p>
+</section>
+
+<section id="letter">
+  <h1>A Letter From My Heart 💌</h1>
+  <p style="font-size:22px">
+    No matter what happens in life,<br>
+    I will always respect, care, and cherish you.<br>
+    You mean more to me than words can express.<br>
+    Happy Valentine’s Day ❤️
+  </p>
+</section>
 
 <script>
-function startSite(){
+function enterSite(){
   document.getElementById("startScreen").style.display="none";
-  document.getElementById("main").style.display="block";
+  document.getElementById("navbar").style.display="block";
+  showTab('home');
+}
+
+function showTab(id){
+  document.querySelectorAll("section").forEach(s=>s.style.display="none");
+  document.getElementById(id).style.display="block";
 }
 
 function moveNo(){
@@ -116,17 +159,12 @@ function moveNo(){
 }
 
 function showLove(){
-  document.body.innerHTML += `
-  <div class="section" style="display:block">
-    <h1>You just made my world brighter 🌸</h1>
-    <p style="font-size:22px">From the moment we met, every little thing became special.
-    Today is just a small excuse to remind you how important you are to me. 💕</p>
-  </div>`;
   showerPetals();
+  alert("You just made my heart bloom with happiness 🌸💖");
 }
 
 function showerPetals(){
-  setInterval(()=>{
+  for(let i=0;i<30;i++){
     let petal=document.createElement("div");
     petal.className="petal";
     petal.innerHTML="🌸";
@@ -134,7 +172,7 @@ function showerPetals(){
     petal.style.animationDuration=(Math.random()*3+2)+"s";
     document.body.appendChild(petal);
     setTimeout(()=>petal.remove(),5000);
-  },200);
+  }
 }
 </script>
 
