@@ -2,15 +2,38 @@
 <html>
 <head>
   <title>Valentine 💖</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      text-align: center;
+      background: pink;
+      font-family: Arial;
+      margin-top: 100px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
+
   <h1>Will you be my Valentine? ❤️</h1>
   <button id="yesBtn">Yes 💘</button>
   <button id="noBtn">No 😅</button>
 
-  <script src="script.js"></script>
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    noBtn.addEventListener("mouseover", () => {
+      noBtn.style.position = "relative";
+      noBtn.style.left = Math.random() * 200 + "px";
+    });
+  </script>
+
 </body>
 </html>
+
+
 
 
