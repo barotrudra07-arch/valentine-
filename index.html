@@ -5,25 +5,45 @@
   <style>
     body {
       margin: 0;
-      overflow: hidden;
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      text-align: center;
       color: white;
+      text-align: center;
+      overflow-x: hidden;
     }
 
-    h1 {
-      margin-top: 120px;
-      font-size: 50px;
-      animation: fadeIn 2s ease-in-out;
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.3);
+      padding: 10px;
     }
 
-    p {
-      font-size: 22px;
-      animation: fadeIn 3s ease-in-out;
+    nav button {
+      background: white;
+      color: #ff4d6d;
+      border: none;
+      padding: 8px 15px;
+      margin: 5px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
     }
 
-    button {
+    section {
+      min-height: 100vh;
+      padding-top: 100px;
+      display: none;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    #home { display: block; }
+
+    h1 { font-size: 45px; }
+    p { font-size: 22px; }
+
+    button.action {
       padding: 12px 25px;
       font-size: 22px;
       margin: 15px;
@@ -36,7 +56,6 @@
     #yesBtn {
       background-color: #ff4d6d;
       color: white;
-      box-shadow: 0 0 15px #ff4d6d;
     }
 
     #noBtn {
@@ -44,13 +63,11 @@
       color: #ff4d6d;
     }
 
-    button:hover {
-      transform: scale(1.1);
-    }
+    button:hover { transform: scale(1.1); }
 
     @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(-20px);}
-      to {opacity: 1; transform: translateY(0);}
+      from {opacity: 0;}
+      to {opacity: 1;}
     }
 
     .heart {
@@ -67,51 +84,83 @@
     }
 
     #message {
-      font-size: 40px;
+      font-size: 36px;
       margin-top: 30px;
       display: none;
-      animation: fadeIn 2s ease-in-out;
     }
   </style>
 </head>
 
 <body>
 
+<nav>
+  <button onclick="showTab('home')">Home 💖</button>
+  <button onclick="showTab('story')">Our Story 📖</button>
+  <button onclick="showTab('messageTab')">Special Message 💌</button>
+</nav>
+
+<!-- HOME -->
+<section id="home">
   <h1>Will you be my Valentine? ❤️</h1>
-  <p>You make my world brighter every day ✨</p>
+  <p>You are the most special person in my life ✨</p>
 
-  <button id="yesBtn">Yes 💘</button>
-  <button id="noBtn">No 😅</button>
+  <button id="yesBtn" class="action">Yes 💘</button>
+  <button id="noBtn" class="action">No 😅</button>
 
-  <div id="message">Yayyy! 💖 You made my day! 💞</div>
+  <div id="message">You just made me the happiest person alive! 💖🌹</div>
+</section>
 
-  <script>
-    const noBtn = document.getElementById("noBtn");
-    noBtn.addEventListener("mouseover", () => {
-      noBtn.style.position = "absolute";
-      noBtn.style.left = Math.random() * window.innerWidth + "px";
-      noBtn.style.top = Math.random() * window.innerHeight + "px";
-    });
+<!-- STORY -->
+<section id="story">
+  <h1>Our Beautiful Story 📖</h1>
+  <p>
+    From the first day we talked, everything felt magical.<br>
+    Every moment with you is my favorite memory.<br>
+    And I want to create thousands more with you. 💞
+  </p>
+</section>
 
-    document.getElementById("yesBtn").onclick = function() {
-      document.getElementById("message").style.display = "block";
-    };
+<!-- MESSAGE -->
+<section id="messageTab">
+  <h1>A Special Message For You 💌</h1>
+  <p>
+    No matter what happens,<br>
+    you will always have a special place in my heart.<br><br>
+    Happy Valentine’s Day ❤️
+  </p>
+</section>
 
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerHTML = "💖";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = Math.random() * 20 + 20 + "px";
-      document.body.appendChild(heart);
+<script>
+  // Tab switching
+  function showTab(tabId) {
+    document.querySelectorAll("section").forEach(sec => sec.style.display = "none");
+    document.getElementById(tabId).style.display = "block";
+  }
 
-      setTimeout(() => {
-        heart.remove();
-      }, 6000);
-    }
+  // Moving NO button
+  const noBtn = document.getElementById("noBtn");
+  noBtn.addEventListener("mouseover", () => {
+    noBtn.style.position = "absolute";
+    noBtn.style.left = Math.random() * window.innerWidth + "px";
+    noBtn.style.top = Math.random() * window.innerHeight + "px";
+  });
 
-    setInterval(createHeart, 300);
-  </script>
+  // YES button message
+  document.getElementById("yesBtn").onclick = function() {
+    document.getElementById("message").style.display = "block";
+  };
+
+  // Floating hearts
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }
+  setInterval(createHeart, 300);
+</script>
 
 </body>
 </html>
