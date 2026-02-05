@@ -12,7 +12,45 @@ body{
   background:linear-gradient(135deg,#fbc2eb,#a6c1ee);
   color:#5a3e5b;
   text-align:center;
-  overflow-x:hidden;
+  overflow:hidden;
+}
+
+/* Floating hearts */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  font-size:22px;
+  animation:floatUp linear infinite;
+  opacity:0.8;
+}
+
+@keyframes floatUp{
+  to{transform:translateY(-110vh);}
+}
+
+/* Butterflies */
+.butterfly{
+  position:fixed;
+  font-size:26px;
+  animation:fly 12s linear infinite;
+}
+
+@keyframes fly{
+  0%{transform:translateX(-10vw) translateY(20vh);}
+  50%{transform:translateX(110vw) translateY(40vh);}
+  100%{transform:translateX(-10vw) translateY(60vh);}
+}
+
+/* Sparkles */
+.sparkle{
+  position:fixed;
+  font-size:14px;
+  animation:blink 2s infinite;
+}
+
+@keyframes blink{
+  0%,100%{opacity:0;}
+  50%{opacity:1;}
 }
 
 /* Start Screen */
@@ -28,15 +66,6 @@ body{
   z-index:10;
 }
 
-#startScreen button{
-  padding:15px 30px;
-  border:none;
-  border-radius:30px;
-  font-size:20px;
-  cursor:pointer;
-}
-
-/* Tabs */
 nav{
   display:none;
   padding:15px;
@@ -98,19 +127,17 @@ button.action{
   <button onclick="enterSite()">Click Here</button>
 </div>
 
-<!-- Tabs -->
 <nav id="navbar">
   <button onclick="showTab('home')">Home 💖</button>
   <button onclick="showTab('about')">About You ✨</button>
-  <button onclick="showTab('memories')">my world</button>
+  <button onclick="showTab('memories')">Memories 📖</button>
   <button onclick="showTab('letter')">Letter 💌</button>
 </nav>
 
-<!-- Sections -->
 <section id="home">
-  <h1> Angel, Will you be my Valentine? ❤️</h1>
+  <h1>Will you be my Valentine? ❤️</h1>
   <button id="yesBtn" class="action" onclick="showLove()">Yes 💘</button>
-  <button id="noBtn" class="action" onmouseover="moveNo()">No </button>
+  <button id="noBtn" class="action" onmouseover="moveNo()">No 😅</button>
 </section>
 
 <section id="about">
@@ -126,17 +153,15 @@ button.action{
   <h1>Our Memories 📖</h1>
   <p style="font-size:22px">
     Every chat, every laugh, every moment spent with you<br>
-    is a memory I will always treasure in my heart.
+    is a memory I will always treasure.
   </p>
 </section>
 
 <section id="letter">
   <h1>A Letter From My Heart 💌</h1>
   <p style="font-size:22px">
-    No matter what happens in life,<br>
-    I will always respect, care, and cherish you.<br>
     You mean more to me than words can express.<br>
-    Happy Valentine’s Day ❤️
+    Happy Valentine’s Day in advance ❤️
   </p>
 </section>
 
@@ -145,6 +170,7 @@ function enterSite(){
   document.getElementById("startScreen").style.display="none";
   document.getElementById("navbar").style.display="block";
   showTab('home');
+  startAnimations();
 }
 
 function showTab(id){
@@ -160,7 +186,6 @@ function moveNo(){
 
 function showLove(){
   showerPetals();
-  alert("You just made my heart bloom with happiness 🌸💖");
 }
 
 function showerPetals(){
@@ -173,6 +198,37 @@ function showerPetals(){
     document.body.appendChild(petal);
     setTimeout(()=>petal.remove(),5000);
   }
+}
+
+/* Continuous animations */
+function startAnimations(){
+  setInterval(()=>{
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="💖";
+    h.style.left=Math.random()*100+"vw";
+    h.style.animationDuration=(Math.random()*4+4)+"s";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),8000);
+  },300);
+
+  setInterval(()=>{
+    let b=document.createElement("div");
+    b.className="butterfly";
+    b.innerHTML="🦋";
+    document.body.appendChild(b);
+    setTimeout(()=>b.remove(),12000);
+  },5000);
+
+  setInterval(()=>{
+    let s=document.createElement("div");
+    s.className="sparkle";
+    s.innerHTML="✨";
+    s.style.left=Math.random()*100+"vw";
+    s.style.top=Math.random()*100+"vh";
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),2000);
+  },700);
 }
 </script>
 
